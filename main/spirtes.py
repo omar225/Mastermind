@@ -170,7 +170,7 @@ class Board:
         random_code = random.sample(COLORS,4)
         for i, pin in enumerate(self.board_pins[0]):
             pin.color = random_code[i]
-            #pin.revealed = False
+            pin.revealed = False
 
     def next_round(self):
         self.tries -= 1
