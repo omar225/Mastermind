@@ -106,7 +106,7 @@ class Game:
         if win:
             message = "YOU WON!"
             sprite = pygame.image.load(resource_path("Assets/HappyFace.png"))
-            sound = pygame.mixer.Sound("Assets/WinSound.mp3")
+            sound = pygame.mixer.Sound(resource_path("Assets/WinSound.mp3"))
         else:
             message = "YOU LOSE!"
             sprite = pygame.image.load(resource_path("Assets/SadFace.png"))

@@ -5,7 +5,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('D:/Uni Stuff/OOP/MasterMind/main/Assets/*', 'Assets')],
+    datas=[('Assets/*', 'Assets')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
