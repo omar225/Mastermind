@@ -25,7 +25,9 @@ def play():
         PLAY_BACK.update(SCREEN)
 
         for event in pygame.event.get():
-            
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BACK.checkForInput(PLAY_MOUSE_POS):
                     click_music.play()

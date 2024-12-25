@@ -37,6 +37,9 @@ def help():
         HELP_BACK.update(SCREEN)
 
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if HELP_BACK.checkForInput(HELP_MOUSE_POS):
                     click_music.play()
