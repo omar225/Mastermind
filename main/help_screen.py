@@ -1,4 +1,6 @@
 import pygame, sys
+
+from resourse_path import resource_path
 from ui import Button
 from assets import WIDTH, HEIGHT, BG, SCREEN, click_music,get_font
 
@@ -28,7 +30,7 @@ def help():
             HELP_RECT = HELP_TEXT.get_rect(center=(800, height_offset))
             SCREEN.blit(HELP_TEXT, HELP_RECT)
 
-        back_button_image = pygame.image.load("Assets/Back-Button.png")
+        back_button_image = pygame.image.load(resource_path("Assets/Back-Button.png"))
         back_button_image = pygame.transform.scale(back_button_image, (100, 50))
         HELP_BACK = Button(image=back_button_image, pos=(130, 95), 
                             text_input="", font=get_font("menu", 20), base_color="White", hovering_color="#b68f40")

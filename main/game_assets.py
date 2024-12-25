@@ -1,3 +1,4 @@
+from resourse_path import resource_path
 
 # Code Pegs
 RED = (255, 0, 0)
@@ -24,5 +25,5 @@ DARKGREY = (40, 40, 40)
 
 # Board background
 
-BOARD_BACKGROUND = "Assets/solid_background.png"
-SCREEN_BACKGROUND = "Assets/Background(2).png"
+BOARD_BACKGROUND = resource_path("Assets/solid_background.png")
+SCREEN_BACKGROUND = resource_path("Assets/Background(2).png")

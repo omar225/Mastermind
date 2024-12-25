@@ -3,6 +3,7 @@ from pygame import Color
 
 from game_settings import*
 from game_assets  import*
+from resourse_path import resource_path
 from assets import get_font, click_music
 from assets import music
 from ui import Button
@@ -12,7 +13,7 @@ from spirtes import*
 
 class Game:
     def __init__(self,screen):
-        pygame.mixer.music.set_volume(0.1)
+        pygame.mixer.music.set_volume(0.3)
         self.screen = screen
         self.screen = pygame.display.set_mode(screen_size,pygame.FULLSCREEN)
         self.screen_background = pygame.image.load(SCREEN_BACKGROUND)
@@ -20,7 +21,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.back_button_clicked = False
 
-        back_button_image = pygame.image.load("Assets/Back-Button.png")
+        back_button_image = pygame.image.load(resource_path("Assets/Back-Button.png"))
         back_button_image = pygame.transform.scale(back_button_image, (100, 50))
         self.back_button = Button(
             image=back_button_image,
@@ -104,12 +105,12 @@ class Game:
         # Load appropriate sprite and sound
         if win:
             message = "YOU WON!"
-            sprite = pygame.image.load("Assets/HappyFace.png")
+            sprite = pygame.image.load(resource_path("Assets/HappyFace.png"))
             sound = pygame.mixer.Sound("Assets/WinSound.mp3")
         else:
             message = "YOU LOSE!"
-            sprite = pygame.image.load("Assets/SadFace.png")
-            sound = pygame.mixer.Sound("Assets/LoseSound.mp3")
+            sprite = pygame.image.load(resource_path("Assets/SadFace.png"))
+            sound = pygame.mixer.Sound(resource_path("Assets/LoseSound.mp3"))
 
         # Scale sprite to fit nicely on the screen
         sprite = pygame.transform.scale(sprite, (200, 200))

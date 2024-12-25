@@ -1,3 +1,7 @@
+import os
+import sys
+
+from resourse_path import resource_path
 from game_screen import Game
 import pygame, sys
 from ui import Button
@@ -30,7 +34,6 @@ def fade_out(screen, color=(0, 0, 0), duration=500):
 
 
 
-
 def main_menu():
     pygame.mixer.music.set_volume(1)
     hover_play = hover_help = hover_quit = False
@@ -42,11 +45,11 @@ def main_menu():
         MENU_TEXT = get_font("menu", 100).render("MASTERMIND", True, "#b68f40")
         MENU_RECT = MENU_TEXT.get_rect(center=(800, 125))
 
-        PLAY_BUTTON = Button(image=pygame.image.load("Assets/Play Rect(1).png"), pos=(800, 300),
+        PLAY_BUTTON = Button(image=pygame.image.load(resource_path("Assets/Play Rect(1).png")), pos=(800, 300),
                             text_input="PLAY", font=get_font("menu", 75), base_color="White", hovering_color="#b68f40")
-        HELP_BUTTON = Button(image=pygame.image.load("Assets/Help Rect(1).png"), pos=(800, 500),
+        HELP_BUTTON = Button(image=pygame.image.load(resource_path("Assets/Help Rect(1).png")), pos=(800, 500),
                             text_input="HELP", font=get_font("menu", 75), base_color="White", hovering_color="#b68f40")
-        QUIT_BUTTON = Button(image=pygame.image.load("Assets/Quit Rect.png"), pos=(800, 700),
+        QUIT_BUTTON = Button(image=pygame.image.load(resource_path("Assets/Quit Rect.png")), pos=(800, 700),
                             text_input="QUIT", font=get_font("menu", 75), base_color="White", hovering_color="#b68f40")
 
         SCREEN.blit(MENU_TEXT, MENU_RECT)
