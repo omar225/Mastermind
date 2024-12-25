@@ -1,84 +1,45 @@
-import pygame
-import sys
+import pygame, sys
+from ui import Button
+from assets import WIDTH, HEIGHT, BG, SCREEN, click_music,get_font
 
-# Initialize Pygame
-pygame.init()
+pygame.display.set_caption("Help Menu")
 
-# Screen dimensions
-WIDTH, HEIGHT = 1800, 600
-
-# Colors
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-BLUE = (0, 120, 255)
-
-# Fonts
-FONT = pygame.font.Font("Font.ttf", 36)
-
-# Initialize the screen
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Mastermind Help Screen")
-
-# Load background image
-BG = pygame.image.load("Background(3).png")
-BG = pygame.transform.scale(BG, (WIDTH, HEIGHT))  # Scale the image to fit the screen dimensions
-
-# Helper function to render text
-def render_text(text, font, color, center):
-    rendered_text = font.render(text, True, color)
-    rect = rendered_text.get_rect(center=center)
-    return rendered_text, rect
-
-# Help screen function
-def help_screen():
+def help():
     while True:
-        # Blit the background image
-        screen.blit(BG, (0, 0))
+        HELP_MOUSE_POS = pygame.mouse.get_pos()
 
-        # Title
-        title_text, title_rect = render_text("Help - Mastermind", FONT, WHITE, (WIDTH // 2, 50))
-        screen.blit(title_text, title_rect)
-
-        # Instructions
-        instructions = [
-            "Mastermind Instructions:",
-            "1. The goal is to guess the hidden sequence of 4 colors.",
-            "2. Each color can be Red, Green, Yellow, Blue, White, or Black.",
-            "3. Use the keys 1-6 to select colors:",
-            "   - 1 = Red, 2 = Green, 3 = Yellow, 4 = Blue, 5 = White, 6 = Black.",
-            "4. Press Backspace to undo the last peg.",
-            "5. Press Enter to submit your guess.",
-            "6. Feedback:",
-            "   - Black peg = Correct color in the correct position.",
-            "   - White peg = Correct color in the wrong position.",
-            "7. You have 10 attempts to guess the correct sequence.",
-            "8. Press Esc to return to the main menu.",
+        SCREEN.blit(BG, (0, 0))
+        
+        instructions = ["",
+            "INSTRUCTIONS",
+            "The computer will select a secret code consisting of 4 colors.",
+            "Your task is to guess the code by placing colored pegs in the empty slots.",
+            "After each guess, the computer will provide feedback in the form of black and white pegs.",
+            "A black peg means a correct color in the correct position.",
+            "A white peg means a correct color in the wrong position.",
+            "Use this feedback to deduce the correct code within 10 turns.",
+            "Click on the colored pegs to select them, then click on the slots to place them.",
+            "Click the 'Check' button to submit your guess and receive feedback.",
         ]
-
-        # Render instructions
-        y_offset = 120
+        
         for line in instructions:
-            instruction_text, instruction_rect = render_text(line, pygame.font.Font("Font.ttf", 24), WHITE, (WIDTH // 2, y_offset))
-            screen.blit(instruction_text, instruction_rect)
-            y_offset += 30
+            height_offset = instructions.index(line) * 90
+            HELP_TEXT = get_font("help", 45).render(line, True, "White")
+            HELP_RECT = HELP_TEXT.get_rect(center=(800, height_offset))
+            SCREEN.blit(HELP_TEXT, HELP_RECT)
 
-        # Back button
-        back_text, back_rect = render_text("Press Esc to go back", FONT, BLUE, (WIDTH // 2, HEIGHT - 50))
-        screen.blit(back_text, back_rect)
+        back_button_image = pygame.image.load("main/Assets/Back-Button.png")
+        back_button_image = pygame.transform.scale(back_button_image, (100, 50))
+        HELP_BACK = Button(image=back_button_image, pos=(130, 95), 
+                            text_input="", font=get_font("menu", 20), base_color="White", hovering_color="#b68f40")
 
-        pygame.display.flip()
+        HELP_BACK.changeColor(HELP_MOUSE_POS)
+        HELP_BACK.update(SCREEN)
 
-        # Event handling
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    return  # Exit the help screen
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if HELP_BACK.checkForInput(HELP_MOUSE_POS):
+                    click_music.play()
+                    return 1
 
-# Run the help screen directly
-if __name__ == "__main__":
-    help_screen()
-
-
+        pygame.display.update()
