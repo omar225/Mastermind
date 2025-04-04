@@ -32,7 +32,7 @@ class CluePin(Pin):
         if self.color is not None:
             pygame.draw.circle(screen,self.color,center,6)
         else:
-            pygame.draw.circle(screen, DARKBROWN, center, 5)
+            pygame.draw.circle(screen, LIGHTBROWN, center, 5)
 
 
 
@@ -54,6 +54,8 @@ class Board:
 
         self.color_selection_surface = pygame.Surface((4*tile_size,2*tile_size))
         self.color_selection_surface.fill(LIGHTGREY)
+
+        self.selected_color = WHITE
 
         self.color_selection = []
         self.board_pins = []
@@ -114,8 +116,7 @@ class Board:
 
         # draw row indicator
         if self.tries > 0:
-
-            pygame.draw.rect(screen,GREEN,(board_offset[0],(tile_size*self.tries)+board_offset[1],4*tile_size,tile_size),2)
+            pygame.draw.rect(screen,self.selected_color,(board_offset[0],(tile_size*self.tries)+board_offset[1],4*tile_size,tile_size),3)
 
         for x in range(0,width,tile_size):
             for y in range(0,height,tile_size):
@@ -127,8 +128,8 @@ class Board:
 
         for pin in self.color_selection:
             if pin.x < mx - board_offset[0] < pin.x + tile_size and pin.y < my - (board_offset[1]+11*tile_size) < pin.y + tile_size:
+                self.selected_color = pin.color
                 return  pin.color
-
         return previous_color
 
     def place_pin(self,mx,my,color):

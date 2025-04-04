@@ -21,6 +21,7 @@ BLACK = (0, 0, 0)
 LIGHTGREY = (120,80,80)
 BGCOLOUR = (118, 50, 42)
 DARKBROWN = (55, 22, 30)
+LIGHTBROWN = (150, 95, 60)
 DARKGREY = (40, 40, 40)
 
 # Board background

@@ -1,3 +1,5 @@
+import sys
+
 import pygame
 from pygame import Color
 
@@ -62,7 +64,7 @@ class Game:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                quit(0)
+                sys.exit()
 
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if self.back_button.checkForInput(pygame.mouse.get_pos()):
